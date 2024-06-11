@@ -1,5 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { CreateTimelineService } from 'src/application/create-timeline.service';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { CreateTimelineService } from '../../application/create-timeline.service';
+import { FindTimelineService } from '../../application/find-timeline.service';
 
 type CreateTimelineDto = {
   title: string;
@@ -9,7 +10,10 @@ type CreateTimelineDto = {
 
 @Controller()
 export class TimelineController {
-  constructor(private readonly createTimelineService: CreateTimelineService) {}
+  constructor(
+    private readonly createTimelineService: CreateTimelineService,
+    private readonly findTimeLineService: FindTimelineService,
+  ) {}
 
   @Post()
   async create(@Body() { date, title, description }: CreateTimelineDto) {
@@ -19,5 +23,10 @@ export class TimelineController {
       description,
     });
     return { timelineId };
+  }
+
+  @Get(':id')
+  findById(@Param('id') id: string) {
+    return this.findTimeLineService.execute(id);
   }
 }

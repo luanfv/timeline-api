@@ -1,5 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { TimelineEntity } from '../domain/timeline.entity';
+import { TimelineMemoryRepository } from '../infra/repository/timeline-memory.repository';
+import { TimelineRepository } from '../domain/interface/timeline.repository';
 
 type CreateTimelineDto = {
   title: string;
@@ -9,9 +11,14 @@ type CreateTimelineDto = {
 
 @Injectable()
 export class CreateTimelineService {
+  constructor(
+    @Inject(TimelineMemoryRepository)
+    private readonly timelineRepository: TimelineRepository,
+  ) {}
+
   async execute({ date, title, description }: CreateTimelineDto) {
     const timeline = TimelineEntity.create(title, date, description);
-    // TODO - save on repository
+    this.timelineRepository.save(timeline);
     return timeline.getId();
   }
 }
