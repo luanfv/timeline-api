@@ -18,7 +18,7 @@ export class TimelineController {
   @Post()
   async create(@Body() { date, title, description }: CreateTimelineDto) {
     const timelineId = await this.createTimelineService.execute({
-      date: new Date(date),
+      date,
       title,
       description,
     });

@@ -13,6 +13,6 @@ export class FindTimelineService {
     const timelineFromRepository = this.timelineRepository.find(timelineId);
     if (!timelineFromRepository)
       throw new NotFoundException('Timeline não encontrada.');
-    return timelineFromRepository.get();
+    return timelineFromRepository.getObject();
   }
 }
