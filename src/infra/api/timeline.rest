@@ -1,0 +1,8 @@
+POST http://localhost:3000/
+content-type: application/json
+
+{
+  "title": "abc",
+  "date": "09-09-2024",
+  "description": "abuble"
+}
