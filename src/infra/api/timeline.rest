@@ -3,7 +3,7 @@ content-type: application/json
 
 {
   "title": "abc",
-  "date": "20/06/2024",
+  "date": "09/6/2024",
   "description": "abuble"
 }
 

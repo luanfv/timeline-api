@@ -1,12 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CreateTimelineService } from '../../application/create-timeline.service';
 import { FindTimelineService } from '../../application/find-timeline.service';
-
-type CreateTimelineDto = {
-  title: string;
-  date: string;
-  description: string;
-};
+import { PostTimelineBodyDto } from './dto/post-timeline-body.dto';
 
 @Controller()
 export class TimelineController {
@@ -16,7 +11,7 @@ export class TimelineController {
   ) {}
 
   @Post()
-  async create(@Body() { date, title, description }: CreateTimelineDto) {
+  async create(@Body() { date, title, description }: PostTimelineBodyDto) {
     const timelineId = await this.createTimelineService.execute({
       date,
       title,
