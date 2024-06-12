@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { TimelineMemoryRepository } from '../infra/repository/timeline-memory.repository';
-import { TimelineRepository } from '../domain/interface/timeline.repository';
+import { TimelineRepository } from './interface/timeline.repository';
 
 @Injectable()
 export class FindTimelineService {

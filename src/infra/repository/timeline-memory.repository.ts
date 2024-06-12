@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { TimelineEntity } from '../../domain/timeline.entity';
-import { TimelineRepository } from '../../domain/interface/timeline.repository';
+import { TimelineRepository } from '../../application/interface/timeline.repository';
 
 @Injectable()
 export class TimelineMemoryRepository implements TimelineRepository {

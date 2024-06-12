@@ -1,4 +1,4 @@
-import { TimelineEntity } from '../timeline.entity';
+import { TimelineEntity } from '../../domain/timeline.entity';
 
 export interface TimelineRepository {
   save(timeline: TimelineEntity): void;

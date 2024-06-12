@@ -1,7 +1,7 @@
 import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
 import { TimelineEntity } from '../domain/timeline.entity';
 import { TimelineMemoryRepository } from '../infra/repository/timeline-memory.repository';
-import { TimelineRepository } from '../domain/interface/timeline.repository';
+import { TimelineRepository } from './interface/timeline.repository';
 
 type CreateTimelineDto = {
   title: string;
