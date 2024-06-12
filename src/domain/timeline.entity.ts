@@ -28,6 +28,10 @@ export class TimelineEntity {
     return this.id;
   }
 
+  getDate() {
+    return this.date.getValue();
+  }
+
   getObject() {
     return {
       id: this.id,
