@@ -37,17 +37,15 @@ export class TimelineForMonthAndYearListService {
   }
 
   private isCheckInEquals(timeline: TimelineEntity, checkIn: string) {
-    const [, month, year] = timeline.getDate().split('/');
-    return checkIn === `${month}/${year}`;
+    return checkIn === `${timeline.month}/${timeline.year}`;
   }
 
   private generateFirstTimeline(
     timeline: TimelineEntity,
   ): TimelineForMonthAndYear {
     const { id, title, description, date } = timeline.getObject();
-    const [, month, year] = timeline.getDate().split('/');
     return {
-      checkIn: `${month}/${year}`,
+      checkIn: `${timeline.month}/${timeline.year}`,
       timelines: [
         {
           id,

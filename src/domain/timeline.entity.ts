@@ -24,10 +24,6 @@ export class TimelineEntity {
     );
   }
 
-  get date() {
-    return this.dateVO.value;
-  }
-
   get day() {
     return this.dateVO.day;
   }

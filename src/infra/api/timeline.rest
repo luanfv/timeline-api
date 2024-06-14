@@ -2,9 +2,8 @@ POST http://localhost:3000/
 content-type: application/json
 
 {
-  "title": "abc",
-  "date": "09/6/2024",
-  "description": "abuble"
+  "title": "test 4",
+  "date": "9/04/2024"
 }
 
 ###
