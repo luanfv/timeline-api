@@ -3,9 +3,9 @@ import { TimelineDateVO } from './timeline-date.vo';
 
 export class TimelineEntity {
   private constructor(
-    private readonly id: string,
+    readonly id: string,
     private readonly title: string,
-    private readonly date: TimelineDateVO,
+    private readonly dateVO: TimelineDateVO,
     private readonly createdAt: Date,
     private readonly updatedAt: Date,
     private readonly description?: string,
@@ -24,19 +24,27 @@ export class TimelineEntity {
     );
   }
 
-  getId() {
-    return this.id;
+  get date() {
+    return this.dateVO.value;
   }
 
-  getDate() {
-    return this.date.getValue();
+  get day() {
+    return this.dateVO.day;
+  }
+
+  get month() {
+    return this.dateVO.month;
+  }
+
+  get year() {
+    return this.dateVO.year;
   }
 
   getObject() {
     return {
       id: this.id,
       title: this.title,
-      date: this.date.getValue(),
+      date: this.dateVO.value,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
       description: this.description,

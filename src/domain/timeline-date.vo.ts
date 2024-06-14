@@ -12,11 +12,23 @@ export class TimelineDateVO {
     this.date = new Date(`${month}-${day}-${year}`);
   }
 
-  getValue(): string {
+  get value(): string {
     const date = `${this.date.getDate()}/${
       this.date.getMonth() + 1
     }/${this.date.getFullYear()}`;
     return date;
+  }
+
+  get day(): number {
+    return this.date.getDate();
+  }
+
+  get month(): number {
+    return this.date.getMonth() + 1;
+  }
+
+  get year(): number {
+    return this.date.getFullYear();
   }
 
   private isValidDay(day: number): boolean {

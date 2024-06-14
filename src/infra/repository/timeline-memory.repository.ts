@@ -11,7 +11,7 @@ export class TimelineMemoryRepository implements TimelineRepository {
   }
 
   find(id: string): TimelineEntity {
-    return this.timelines.find((timeline) => timeline.getId() === id);
+    return this.timelines.find((timeline) => timeline.id === id);
   }
 
   getAll(): TimelineEntity[] {

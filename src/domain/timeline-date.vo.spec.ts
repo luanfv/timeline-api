@@ -56,11 +56,35 @@ describe('TimelineDateVO unit tests', () => {
     });
   });
 
-  describe('getValue', () => {
-    it('SHOULD return value received', () => {
-      const date = new TimelineDateVO('01/01/2024');
-      const expectedValue = '1/1/2024';
-      expect(date.getValue()).toEqual(expectedValue);
+  describe('WHEN get value', () => {
+    it('SHOULD return full date', () => {
+      const date = new TimelineDateVO('01/02/2024');
+      const expectedValue = '1/2/2024';
+      expect(date.value).toEqual(expectedValue);
+    });
+  });
+
+  describe('WHEN get day', () => {
+    it('SHOULD return date day', () => {
+      const date = new TimelineDateVO('01/02/2024');
+      const expectedValue = 1;
+      expect(date.day).toEqual(expectedValue);
+    });
+  });
+
+  describe('WHEN get month', () => {
+    it('SHOULD return date month', () => {
+      const date = new TimelineDateVO('01/02/2024');
+      const expectedValue = 2;
+      expect(date.month).toEqual(expectedValue);
+    });
+  });
+
+  describe('WHEN get year', () => {
+    it('SHOULD return date year', () => {
+      const date = new TimelineDateVO('01/02/2024');
+      const expectedValue = 2024;
+      expect(date.year).toEqual(expectedValue);
     });
   });
 });

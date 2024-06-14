@@ -20,7 +20,7 @@ export class CreateTimelineService {
     try {
       const timeline = TimelineEntity.create(title, date, description);
       this.timelineRepository.save(timeline);
-      return timeline.getId();
+      return timeline.id;
     } catch (err) {
       if (err instanceof Error) throw new ForbiddenException(err.message);
       throw err;
