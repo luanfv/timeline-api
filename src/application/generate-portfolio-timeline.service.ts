@@ -1,4 +1,4 @@
-import { TimelineForMonthAndYearListService } from 'src/domain/service/timeline-for-month-and-year-list.service';
+import { TimelineForMonthAndYearListService } from '../domain/service/timeline-for-month-and-year-list.service';
 import { TimelineMemoryRepository } from '../infra/repository/timeline-memory.repository';
 import { TimelineRepository } from './interface/timeline.repository';
 import { Inject, Injectable } from '@nestjs/common';
