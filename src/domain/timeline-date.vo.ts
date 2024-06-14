@@ -6,7 +6,7 @@ export class TimelineDateVO {
     const day = Number(dayRaw);
     const month = Number(monthRaw);
     const year = Number(yearRaw);
-    if (!this.isValidDay(day)) throw new Error('Dia inválido.');
+    if (!this.isValidDay(day)) throw new Error('Dia inválido');
     if (!this.isValidMonth(month)) throw new Error('Mês inválido');
     if (!this.isValidYear(year)) throw new Error('Ano inválido');
     this.date = new Date(`${month}-${day}-${year}`);
@@ -28,6 +28,6 @@ export class TimelineDateVO {
   }
 
   private isValidYear(year: number): boolean {
-    return !!year;
+    return !!year && year > 0;
   }
 }
