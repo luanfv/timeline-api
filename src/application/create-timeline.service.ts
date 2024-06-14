@@ -19,7 +19,7 @@ export class CreateTimelineService {
   async execute({ date, title, description }: CreateTimelineDto) {
     try {
       const timeline = TimelineEntity.create(title, date, description);
-      this.timelineRepository.save(timeline);
+      await this.timelineRepository.save(timeline);
       return timeline.id;
     } catch (err) {
       if (err instanceof Error) throw new ForbiddenException(err.message);

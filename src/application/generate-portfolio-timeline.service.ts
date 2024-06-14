@@ -11,8 +11,8 @@ export class GeneratePortfolioTimelineService {
     private readonly createPortfolioTimelineList: TimelineForMonthAndYearListService,
   ) {}
 
-  execute() {
-    const timelines = this.timelineRepository.getAll();
+  async execute() {
+    const timelines = await this.timelineRepository.getAll();
     const timelinesMonthYear =
       this.createPortfolioTimelineList.execute(timelines);
     return timelinesMonthYear;

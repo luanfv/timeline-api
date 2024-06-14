@@ -10,7 +10,9 @@ export class FindTimelineService {
   ) {}
 
   async execute(timelineId: string) {
-    const timelineFromRepository = this.timelineRepository.find(timelineId);
+    const timelineFromRepository = await this.timelineRepository.find(
+      timelineId,
+    );
     if (!timelineFromRepository)
       throw new NotFoundException('Timeline não encontrada.');
     return timelineFromRepository.getObject();

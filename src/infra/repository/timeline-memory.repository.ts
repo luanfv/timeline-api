@@ -6,15 +6,15 @@ import { TimelineRepository } from '../../application/interface/timeline.reposit
 export class TimelineMemoryRepository implements TimelineRepository {
   private readonly timelines: TimelineEntity[] = [];
 
-  save(timeline: TimelineEntity): void {
+  async save(timeline: TimelineEntity): Promise<void> {
     this.timelines.push(timeline);
   }
 
-  find(id: string): TimelineEntity {
+  async find(id: string): Promise<TimelineEntity> {
     return this.timelines.find((timeline) => timeline.id === id);
   }
 
-  getAll(): TimelineEntity[] {
+  async getAll(): Promise<TimelineEntity[]> {
     return this.timelines;
   }
 }

@@ -1,7 +1,7 @@
 import { TimelineEntity } from '../../domain/timeline.entity';
 
 export interface TimelineRepository {
-  save(timeline: TimelineEntity): void;
-  find(id: string): TimelineEntity;
-  getAll(): TimelineEntity[];
+  save(timeline: TimelineEntity): Promise<void>;
+  find(id: string): Promise<TimelineEntity>;
+  getAll(): Promise<TimelineEntity[]>;
 }
