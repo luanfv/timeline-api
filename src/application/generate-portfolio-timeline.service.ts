@@ -1,12 +1,12 @@
+import { TimelineDatabaseRepository } from '../infra/repository/timeline-database.repository';
 import { TimelineForMonthAndYearListService } from '../domain/service/timeline-for-month-and-year-list.service';
-import { TimelineMemoryRepository } from '../infra/repository/timeline-memory.repository';
 import { TimelineRepository } from './interface/timeline.repository';
 import { Inject, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class GeneratePortfolioTimelineService {
   constructor(
-    @Inject(TimelineMemoryRepository)
+    @Inject(TimelineDatabaseRepository)
     private readonly timelineRepository: TimelineRepository,
     private readonly createPortfolioTimelineList: TimelineForMonthAndYearListService,
   ) {}

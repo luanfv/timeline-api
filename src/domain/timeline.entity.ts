@@ -1,7 +1,17 @@
 import { randomUUID } from 'node:crypto';
 import { TimelineDateVO } from './timeline-date.vo';
+import { TimelineEntity } from '../application/interface/timeline.entity';
 
-export class TimelineEntity {
+type TimelineRestore = {
+  id: string;
+  title: string;
+  date: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  description?: string;
+};
+
+export class Timeline implements TimelineEntity {
   private constructor(
     readonly id: string,
     private readonly title: string,
@@ -11,10 +21,14 @@ export class TimelineEntity {
     private readonly description?: string,
   ) {}
 
-  static create(title: string, date: string, description?: string) {
+  static create(
+    title: string,
+    date: string,
+    description?: string,
+  ): TimelineEntity {
     const id = randomUUID();
     const now = new Date();
-    return new TimelineEntity(
+    return new Timeline(
       id,
       title,
       new TimelineDateVO(date),
@@ -22,6 +36,30 @@ export class TimelineEntity {
       now,
       description,
     );
+  }
+
+  static restore({
+    id,
+    title,
+    date,
+    createdAt,
+    updatedAt,
+    description,
+  }: TimelineRestore): TimelineEntity {
+    return new Timeline(
+      id,
+      title,
+      new TimelineDateVO(
+        `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
+      ),
+      createdAt,
+      updatedAt,
+      description,
+    );
+  }
+
+  get day() {
+    return this.dateVO.day;
   }
 
   get month() {
@@ -32,7 +70,7 @@ export class TimelineEntity {
     return this.dateVO.year;
   }
 
-  getObject() {
+  get object() {
     return {
       id: this.id,
       title: this.title,

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { TimelineEntity } from '../timeline.entity';
+import { TimelineEntity } from '../../application/interface/timeline.entity';
 
 type TimelineForMonthAndYear = {
   checkIn: string;
@@ -21,7 +21,7 @@ export class TimelineForMonthAndYearListService {
           this.isCheckInEquals(timeline, checkIn),
         );
         if (monthYearIndex >= 0) {
-          const { id, title, description, date } = timeline.getObject();
+          const { id, title, description, date } = timeline.object;
           timelinesMonthYear[monthYearIndex].timelines.push({
             id,
             title,
@@ -43,7 +43,7 @@ export class TimelineForMonthAndYearListService {
   private generateFirstTimeline(
     timeline: TimelineEntity,
   ): TimelineForMonthAndYear {
-    const { id, title, description, date } = timeline.getObject();
+    const { id, title, description, date } = timeline.object;
     return {
       checkIn: `${timeline.month}/${timeline.year}`,
       timelines: [

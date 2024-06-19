@@ -1,7 +1,7 @@
 import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
-import { TimelineEntity } from '../domain/timeline.entity';
-import { TimelineMemoryRepository } from '../infra/repository/timeline-memory.repository';
+import { Timeline } from '../domain/timeline.entity';
 import { TimelineRepository } from './interface/timeline.repository';
+import { TimelineDatabaseRepository } from '../infra/repository/timeline-database.repository';
 
 type CreateTimelineDto = {
   title: string;
@@ -12,13 +12,13 @@ type CreateTimelineDto = {
 @Injectable()
 export class CreateTimelineService {
   constructor(
-    @Inject(TimelineMemoryRepository)
+    @Inject(TimelineDatabaseRepository)
     private readonly timelineRepository: TimelineRepository,
   ) {}
 
   async execute({ date, title, description }: CreateTimelineDto) {
     try {
-      const timeline = TimelineEntity.create(title, date, description);
+      const timeline = Timeline.create(title, date, description);
       await this.timelineRepository.save(timeline);
       return timeline.id;
     } catch (err) {
