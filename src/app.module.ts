@@ -6,6 +6,7 @@ import { GeneratePortfolioTimelineService } from './application/generate-portfol
 import { TimelineForMonthAndYearListService } from './domain/service/timeline-for-month-and-year-list.service';
 import { PrismaService } from './infra/prisma.service';
 import { TimelineDatabaseRepository } from './infra/repository/timeline-database.repository';
+import { TimelineMemoryRepository } from './infra/repository/timeline-memory.repository';
 
 @Module({
   imports: [],
@@ -14,9 +15,10 @@ import { TimelineDatabaseRepository } from './infra/repository/timeline-database
     CreateTimelineService,
     FindTimelineService,
     GeneratePortfolioTimelineService,
-    TimelineDatabaseRepository,
+    // TimelineDatabaseRepository,
+    TimelineMemoryRepository,
     TimelineForMonthAndYearListService,
-    PrismaService,
+    // PrismaService,
   ],
 })
 export class AppModule {}
