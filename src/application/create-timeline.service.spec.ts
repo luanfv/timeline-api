@@ -9,17 +9,17 @@ import { TimelineDatabaseRepository } from '../infra/repository/timeline-databas
 import { PrismaService } from '../infra/prisma.service';
 
 describe('CreateTimelineService integration tests', () => {
-  // const timelineRepository = new TimelineMemoryRepository();
+  const timelineRepository = new TimelineMemoryRepository();
   let app: INestApplication;
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
       imports: [AppModule],
     })
-      // .overrideProvider(TimelineDatabaseRepository)
-      // .useValue(timelineRepository)
-      // .overrideProvider(PrismaService)
-      // .useValue(createMock<PrismaService>())
+      .overrideProvider(TimelineDatabaseRepository)
+      .useValue(timelineRepository)
+      .overrideProvider(PrismaService)
+      .useValue(createMock<PrismaService>())
       .compile();
     app = module.createNestApplication();
     await app.init();
@@ -31,7 +31,7 @@ describe('CreateTimelineService integration tests', () => {
 
   it('SHOULD save the timeline on repository', async () => {
     const service = app.get<CreateTimelineService>(CreateTimelineService);
-    const repository = app.get<TimelineRepository>(TimelineMemoryRepository);
+    const repository = app.get<TimelineRepository>(TimelineDatabaseRepository);
     const timelineId = await service.execute({
       date: '01/2/2024',
       title: 'application test',

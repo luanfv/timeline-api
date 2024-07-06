@@ -1,12 +1,11 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { TimelineRepository } from './interface/timeline.repository';
-// import { TimelineDatabaseRepository } from '../infra/repository/timeline-database.repository';
-import { TimelineMemoryRepository } from '../infra/repository/timeline-memory.repository';
+import { TimelineDatabaseRepository } from '../infra/repository/timeline-database.repository';
 
 @Injectable()
 export class FindTimelineService {
   constructor(
-    @Inject(TimelineMemoryRepository)
+    @Inject(TimelineDatabaseRepository)
     private readonly timelineRepository: TimelineRepository,
   ) {}
 
