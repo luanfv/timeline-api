@@ -72,7 +72,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'api-timeline'
+          app-name: 'luanfv-timeline-api'
           slot-name: 'Production'
           package: .
           
