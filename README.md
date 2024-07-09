@@ -17,7 +17,7 @@ $ npm run i
 3. Run migration to database
 ```ssh
 ## run
-$ npx prisma generate
+$ npx prisma migrate dev
 ```
 
 4. Start the server

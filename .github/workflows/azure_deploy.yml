@@ -21,21 +21,16 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm run build
+          npm run test
 
-      - name: set .env
-        run: |
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
-
-      - name: run migrations
+      - name: Run migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma migrate deploy
-        
-      - name: delete .env
-        run: rm .env
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: zip release.zip ./node_modules ./dist ./prisma ./package.json ./env -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -60,19 +55,18 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C18DEF49D35248C9ABDD4121F3987CEF }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B639A54A88404234BF8ABDED5E25BA2B }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E0E891B7CB154F15943672F7E4CDA0B9 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'luanfv-timeline-api'
-          slot-name: 'Production'
+          app-name: ${{ vars.AZUREAPPSERVICE_APPNAME }}
+          slot-name: ${{ vars.AZUREAPPSERVICE_SLOTNAME }}
           package: .
-          
