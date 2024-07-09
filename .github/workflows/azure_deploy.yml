@@ -24,6 +24,11 @@ jobs:
           npm run build
           npm run test
 
+      - name: Run migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npx prisma migrate deploy
+
       - name: Zip artifact for deployment
         run: zip release.zip ./node_modules ./dist ./prisma ./package.json ./env -r
 
@@ -50,11 +55,6 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-
-      - name: run migrations
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate deploy
 
       - name: Login to Azure
         uses: azure/login@v1
