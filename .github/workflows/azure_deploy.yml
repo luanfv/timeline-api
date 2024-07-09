@@ -67,6 +67,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZUREAPPSERVICE_APPNAME }}
-          slot-name: ${{ env.AZUREAPPSERVICE_SLOTNAME }}
+          app-name: ${{ vars.AZUREAPPSERVICE_APPNAME }}
+          slot-name: ${{ vars.AZUREAPPSERVICE_SLOTNAME }}
           package: .
